@@ -1,7 +1,9 @@
 import { Metadata } from "next";
-import './styles/globals.css';
+import './globals.css';
 
-import type { Viewport } from 'next'
+import { ThemeSwitcherProvider } from "@/app/contexts/ThemeSwitcherProvider";
+import Header from "@/components/Header";
+import type { Viewport } from 'next';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://example.com'),
@@ -20,9 +22,20 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="pt-BR">
+      <head>
+        <meta name="google" content="notranslate" />
+        <meta name="google-site-verification" content="your-verification-code" />
+      </head>
       <body>
-        {children}
+        <ThemeSwitcherProvider>
+          <div className="min-h-screen">
+            <Header />
+            <main>
+              {children}
+            </main>
+          </div>
+        </ThemeSwitcherProvider>
       </body>
     </html>
   );
